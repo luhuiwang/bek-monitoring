@@ -1,2 +1,1 @@
-# bek-monitoring
-
+# Beat-ElasticSearch-Kibana Monitoring Stack

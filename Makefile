@@ -1,4 +1,4 @@
-.PHONY: init pull build build-nc run clean cleanall
+.PHONY: init pull build build-nc run run-beat clean cleanall
 
 init: 
 	@which docker >/dev/null || ( echo "Error: Docker is not installed"; exit 1 )
@@ -26,7 +26,9 @@ run-beat: init
 	@echo "Monitoring stack (including beats) is started!"
 
 clean: 
-	@docker-compose down --remove-orphans -v
+	@-docker-compose down --remove-orphans -v
+	@-docker-compose -f docker-compose.beat.yml down
 
 cleanall: 
 	@-docker-compose down --remove-orphans --rmi all -v
+	@-docker-compose -f docker-compose.beat.yml down --remove-orphans --rmi all -v

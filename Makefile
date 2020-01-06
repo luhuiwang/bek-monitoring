@@ -17,6 +17,12 @@ run: init pull build
 	@echo "ElasticSearch Url: http://${ELASTICSEARCH_HOST}:9200/"
 	@echo "Kibana Url: http://${KIBANA_HOST}:5601/"
 
+start:
+	@docker-compose start
+
+stop:
+	@docker-compose stop
+
 pull-beat: init
 	@docker-compose -f docker-compose.beat.yml pull
 
@@ -28,10 +34,20 @@ run-beat: init pull-beat build-beat
 	@sleep 60
 	@echo "Monitoring stack (including beats) is started!"
 
+start-beat:
+	@docker-compose -f docker-compose.beat.yml start
+
+stop-beat:
+	@docker-compose -f docker-compose.beat.yml stop
+
 clean: 
 	@-docker-compose down --remove-orphans -v
+
+clean-beat:
 	@-docker-compose -f docker-compose.beat.yml down --remove-orphans -v
  
 cleanall: 
 	@-docker-compose down --remove-orphans --rmi all -v
+
+cleanall-beat:
 	@-docker-compose -f docker-compose.beat.yml down --remove-orphans --rmi all -v

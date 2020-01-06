@@ -11,6 +11,7 @@ build: init
 	@docker-compose build
 
 run: init pull build
+	@source .env
 	@docker-compose up -d
 	@sleep 60
 	@echo "Monitoring stack (including ElasticSearch and Kibana) is started!"
@@ -30,6 +31,7 @@ build-beat: init
 	@docker-compose -f docker-compose.beat.yml build
 
 run-beat: init pull-beat build-beat
+	@source .env
 	@docker-compose -f docker-compose.beat.yml up -d
 	@sleep 60
 	@echo "Monitoring stack (including beats) is started!"

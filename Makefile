@@ -16,9 +16,8 @@ run: init pull build
 	@docker-compose up -d
 	@sleep 60
 	@echo "Monitoring stack (including ElasticSearch and Kibana) is started!"
-	@source .env
-	@echo "ElasticSearch Url: http://${ELASTICSEARCH_HOST}:9200/"
-	@echo "Kibana Url: http://${KIBANA_HOST}:5601/"
+	@source .env && echo "ElasticSearch Url: http://${ELASTICSEARCH_HOST}:9200/"
+	@source .env && echo "Kibana Url: http://${KIBANA_HOST}:5601/"
 
 start:
 	@docker-compose start
@@ -36,9 +35,8 @@ run-beat: init pull-beat build-beat
 	@docker-compose -f docker-compose.beat.yml up -d
 	@sleep 60
 	@echo "Monitoring stack (including beats) is started!"
-	@source .env
-	@echo "ElasticSearch Url: http://${ELASTICSEARCH_HOST}:9200/"
-	@echo "Kibana Url: http://${KIBANA_HOST}:5601/"
+	@source .env && echo "ElasticSearch Url: http://${ELASTICSEARCH_HOST}:9200/"
+	@source .env && echo "Kibana Url: http://${KIBANA_HOST}:5601/"
 
 start-beat:
 	@docker-compose -f docker-compose.beat.yml start

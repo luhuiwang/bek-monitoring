@@ -1,3 +1,5 @@
+SHELL:=/bin/bash 
+
 .PHONY: init pull build build-nc run run-beat clean cleanall
 
 init: 

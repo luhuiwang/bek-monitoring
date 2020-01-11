@@ -46,10 +46,10 @@ stop-beat:
 	@docker-compose -f docker-compose.beat.yml stop
 
 clean: 
-	@-docker-compose down --remove-orphans -v
+	@-docker-compose down -v
 
 clean-beat:
-	@-docker-compose -f docker-compose.beat.yml down --remove-orphans -v
+	@-docker-compose -f docker-compose.beat.yml down -v
  
 cleanall: 
 	@-docker-compose down --remove-orphans --rmi all -v

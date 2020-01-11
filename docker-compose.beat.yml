@@ -15,7 +15,7 @@ services:
       - KIBANA_HOST=${KIBANA_HOST:-kibana}
     command: ["--strict.perms=false"]
     networks:
-      - elastic
+      - elastic-beat
 
   metricbeat:
     image: docker.elastic.co/beats/metricbeat:${ELK_VERSION}
@@ -32,7 +32,7 @@ services:
       - KIBANA_HOST=${KIBANA_HOST:-kibana}
     command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
     networks:
-      - elastic
+      - elastic-beat
 
 networks:
-  elastic:
+  elastic-beat:

@@ -1,4 +1,5 @@
-SHELL:=/bin/bash 
+SHELL:=/bin/bash
+include .env 
 
 .PHONY: init pull build build-nc run run-beat clean cleanall
 
@@ -12,12 +13,12 @@ pull: init
 build: init
 	@docker-compose build
 
-run: init pull build
+run: 
 	@docker-compose up -d
 	@sleep 60
 	@echo "Monitoring stack (including ElasticSearch and Kibana) is started!"
-	@source .env && echo "ElasticSearch Url: http://${ELASTICSEARCH_HOST}:9200/"
-	@source .env && echo "Kibana Url: http://${KIBANA_HOST}:5601/"
+	@echo "ElasticSearch Url: http://${ELASTICSEARCH_HOST}:9200/"
+	@echo "Kibana Url: http://${KIBANA_HOST}:5601/"
 
 start:
 	@docker-compose start
@@ -31,12 +32,12 @@ pull-beat: init
 build-beat: init
 	@docker-compose -f docker-compose.beat.yml build
 
-run-beat: init pull-beat build-beat
+run-beat: 
 	@docker-compose -f docker-compose.beat.yml up -d
 	@sleep 60
 	@echo "Monitoring stack (including beats) is started!"
-	@source .env && echo "ElasticSearch Url: http://${ELASTICSEARCH_HOST}:9200/"
-	@source .env && echo "Kibana Url: http://${KIBANA_HOST}:5601/"
+	@echo "ElasticSearch Url: http://${ELASTICSEARCH_HOST}:9200/"
+	@echo "Kibana Url: http://${KIBANA_HOST}:5601/"
 
 start-beat:
 	@docker-compose -f docker-compose.beat.yml start
